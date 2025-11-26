@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxora AI Studio - AI Image Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <style>
+      :root {
+        --background: 225 45% 97%;
+        --foreground: 224 28% 14%;
+        --card: 0 0% 100%;
+        --card-foreground: 224 28% 14%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 224 28% 14%;
+        --primary: 195 100% 60%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 221 53% 96%;
+        --secondary-foreground: 225 25% 28%;
+        --muted: 221 30% 95%;
+        --muted-foreground: 225 16% 50%;
+        --accent: 260 80% 92%;
+        --accent-foreground: 226 25% 26%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 220 24% 88%;
+        --input: 220 24% 88%;
+        --ring: 195 100% 65%;
+        --radius: 0.5rem;
+      }
+      .dark {
+        --background: 223 35% 9%;
+        --foreground: 210 40% 90%;
+        --card: 222 34% 13%;
+        --card-foreground: 210 40% 90%;
+        --popover: 222 34% 13%;
+        --popover-foreground: 210 40% 90%;
+        --primary: 195 85% 70%;
+        --primary-foreground: 220 65% 10%;
+        --secondary: 225 25% 18%;
+        --secondary-foreground: 210 40% 90%;
+        --muted: 222 25% 20%;
+        --muted-foreground: 220 20% 70%;
+        --accent: 262 35% 34%;
+        --accent-foreground: 210 40% 95%;
+        --destructive: 0 63% 45%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 222 25% 24%;
+        --input: 222 25% 24%;
+        --ring: 195 85% 70%;
+      }
+      * {
+        border-color: hsl(var(--border));
+      }
+      body {
+        background-image:
+          radial-gradient(circle at 15% 20%, hsl(var(--primary) / 0.18), transparent 32%),
+          radial-gradient(circle at 80% 0%, hsl(var(--accent) / 0.18), transparent 28%),
+          linear-gradient(135deg, hsl(var(--background)), hsl(var(--background)));
+        color: hsl(var(--foreground));
+        min-height: 100vh;
+        font-feature-settings: "rlig" 1, "calt" 1;
+        font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Space Grotesk', 'Inter', 'sans-serif'],
+            },
+            colors: {
+              border: "hsl(var(--border))",
+              input: "hsl(var(--input))",
+              ring: "hsl(var(--ring))",
+              background: "hsl(var(--background))",
+              foreground: "hsl(var(--foreground))",
+              primary: {
+                DEFAULT: "hsl(var(--primary))",
+                foreground: "hsl(var(--primary-foreground))",
+              },
+              secondary: {
+                DEFAULT: "hsl(var(--secondary))",
+                foreground: "hsl(var(--secondary-foreground))",
+              },
+              destructive: {
+                DEFAULT: "hsl(var(--destructive))",
+                foreground: "hsl(var(--destructive-foreground))",
+              },
+              muted: {
+                DEFAULT: "hsl(var(--muted))",
+                foreground: "hsl(var(--muted-foreground))",
+              },
+              accent: {
+                DEFAULT: "hsl(var(--accent))",
+                foreground: "hsl(var(--accent-foreground))",
+              },
+              popover: {
+                DEFAULT: "hsl(var(--popover))",
+                foreground: "hsl(var(--popover-foreground))",
+              },
+              card: {
+                DEFAULT: "hsl(var(--card))",
+                foreground: "hsl(var(--card-foreground))",
+              },
+            },
+            borderRadius: {
+              lg: "var(--radius)",
+              md: "calc(var(--radius) - 2px)",
+              sm: "calc(var(--radius) - 4px)",
+            },
+            keyframes: {
+              'fade-in': {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+            },
+            animation: {
+              'fade-in': 'fade-in 0.3s ease-out',
+            },
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-easy-crop": "https://aistudiocdn.com/react-easy-crop@^5.5.3"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
