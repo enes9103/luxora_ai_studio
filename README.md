@@ -1,20 +1,28 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Luxora AI Studio
 
-# Run and deploy your AI Studio app
+Luxora AI Studio transforms your photos into cinematic and experimental looks using Gemini models. Upload one or two subjects, tailor styles and camera angles, preview JSON prompts, and export or save to Google Drive. After the first 3 free credits, a Pro upsell encourages upgrading for unlimited renders.
 
-This contains everything you need to run your app locally.
+## Features
+- Dual subject uploads with optional negative prompts and background removal
+- Text and image model selection (Gemini 3 Pro/2.5 options)
+- JSON-only mode for prompt export and history search/download
+- In-app Pro upsell after 3 renders
+- Google Drive save (when configured)
 
-View your app in AI Studio: https://ai.studio/apps/drive/16jsS8XIcRHfP0XhCU6tZpazM4AgkSojG
+## Quickstart
+1) Install dependencies  
+   ```bash
+   npm install
+   ```
+2) Configure your key in `.env.local`  
+   ```
+   GEMINI_API_KEY=your-key-here
+   ```
+3) Run the app  
+   ```bash
+   npm run dev
+   ```
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Notes
+- Node.js 18+ recommended.
+- Set Google Drive client credentials in `services/googleDriveService.ts` to enable Drive saving.
