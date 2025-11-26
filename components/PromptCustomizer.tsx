@@ -342,11 +342,10 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1.05fr,1.1fr] gap-6">
-      <div className="space-y-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
         <Card>
           <CardHeader title="1. Person 1" description="Upload photo and add details." />
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 h-full">
               <ImageUploader onImageUpload={(img) => onImageUpload(img, 1)} uploadedImage={uploadedImage1} />
               <GenderSelector selectedGender={gender1} onGenderChange={setGender1} />
               <div className="pt-2 border-t border-border">
@@ -377,7 +376,7 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
         
         <Card>
           <CardHeader title="2. Person 2 (Optional)" description="Add a second person to the scene." />
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 h-full">
               <ImageUploader onImageUpload={(img) => onImageUpload(img, 2)} uploadedImage={uploadedImage2} />
               <GenderSelector selectedGender={gender2} onGenderChange={setGender2} />
               <div className="pt-2 border-t border-border">
@@ -403,11 +402,9 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
                       </div>
                   </div>
               </div>
-          </CardContent>
-        </Card>
-      </div>
+        </CardContent>
+      </Card>
       
-      <div className="space-y-6">
           <Card>
              <CardHeader title="3. Configure AI" description="Set parameters for your creation." />
              <CardContent className="space-y-4">
@@ -572,13 +569,12 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
           
           <Card>
             <CardHeader title="4. Generate" description="Let the AI surprise you." />
-            <CardFooter>
-               <button type="button" onClick={handleGenerate} disabled={isDisabled} className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed font-bold py-3 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background">
-                 {isDisabled ? 'Generating...' : 'Randomize & Create'}
-               </button>
-            </CardFooter>
+          <CardFooter>
+             <button type="button" onClick={handleGenerate} disabled={isDisabled} className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed font-bold py-3 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background">
+               {isDisabled ? 'Generating...' : 'Randomize & Create'}
+             </button>
+          </CardFooter>
           </Card>
-      </div>
     </div>
   );
 };

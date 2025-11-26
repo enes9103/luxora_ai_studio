@@ -602,67 +602,63 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid items-start gap-6 lg:grid-cols-[1.05fr,1.15fr]">
-              <div className="space-y-6">
-                <PromptCustomizer 
-                  onGenerateRandom={handleGenerateRandom}
-                  onImageUpload={handleImageUpload}
-                  uploadedImage1={originalImage1}
-                  uploadedImage2={originalImage2}
-                  isDisabled={isLoading || isGeneratingNewPrompt}
-                  numImages={numImages}
-                  setNumImages={setNumImages}
-                  isJsonOnly={isJsonOnly}
-                  setIsJsonOnly={setIsJsonOnly}
-                  removeBackground={removeBackground}
-                  setRemoveBackground={setRemoveBackground}
-                  textModel={textModel}
-                  setTextModel={setTextModel}
-                  imageModel={imageModel}
-                  setImageModel={setImageModel}
-                />
-              </div>
+            <PromptCustomizer 
+              onGenerateRandom={handleGenerateRandom}
+              onImageUpload={handleImageUpload}
+              uploadedImage1={originalImage1}
+              uploadedImage2={originalImage2}
+              isDisabled={isLoading || isGeneratingNewPrompt}
+              numImages={numImages}
+              setNumImages={setNumImages}
+              isJsonOnly={isJsonOnly}
+              setIsJsonOnly={setIsJsonOnly}
+              removeBackground={removeBackground}
+              setRemoveBackground={setRemoveBackground}
+              textModel={textModel}
+              setTextModel={setTextModel}
+              imageModel={imageModel}
+              setImageModel={setImageModel}
+            />
 
-              <div className="space-y-6">
-                {error && (
-                  <div className="bg-destructive/10 border border-destructive/25 text-destructive-foreground p-4 rounded-xl flex items-start gap-3 shadow-md" role="alert">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                      <div className="flex-grow">
-                          <h3 className="font-semibold">Bir şeyler ters gitti</h3>
-                          <div className="text-sm text-destructive-foreground/80 whitespace-pre-wrap mt-1">{error}</div>
-                          <div className="mt-3 flex items-center gap-3">
-                              {lastFailedAction && (
-                                  <button
-                                      onClick={handleRetry}
-                                      className="px-3 py-1.5 text-sm font-semibold rounded-md transition-colors bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background"
-                                  >
-                                      Tekrar Dene
-                                  </button>
-                              )}
-                              <button
-                                  onClick={() => { setError(null); setLastFailedAction(null); }}
-                                  className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors border border-destructive/30 text-destructive-foreground/80 hover:bg-destructive/20 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background"
-                              >
-                                  Kapat
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-                )}
-                <Preview
-                  editedImages={editedImages}
-                  isLoading={isLoading || isGeneratingNewPrompt}
-                  prompt={currentPrompt}
-                  onSaveToDrive={handleSaveToDrive}
-                  onSignIn={handleSignIn}
-                  isSignedIn={isSignedIn}
-                  isGapiReady={isGapiReady}
-                  isSavingToDrive={isSavingToDrive}
-                  isDriveConfigured={googleDriveService.isDriveConfigured}
-                  onRetryWithSamePrompt={handleRetryWithSamePrompt}
-                />
-                <History prompts={promptHistory} onSelectPrompt={handleUseHistoryPrompt} isGeneratingNewPrompt={isGeneratingNewPrompt} />
-              </div>
+            <div className="space-y-6">
+              {error && (
+                <div className="bg-destructive/10 border border-destructive/25 text-destructive-foreground p-4 rounded-xl flex items-start gap-3 shadow-md" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    <div className="flex-grow">
+                        <h3 className="font-semibold">Something went wrong</h3>
+                        <div className="text-sm text-destructive-foreground/80 whitespace-pre-wrap mt-1">{error}</div>
+                        <div className="mt-3 flex items-center gap-3">
+                            {lastFailedAction && (
+                                <button
+                                    onClick={handleRetry}
+                                    className="px-3 py-1.5 text-sm font-semibold rounded-md transition-colors bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background"
+                                >
+                                    Retry
+                                </button>
+                            )}
+                            <button
+                                onClick={() => { setError(null); setLastFailedAction(null); }}
+                                className="px-3 py-1.5 text-sm font-medium rounded-md transition-colors border border-destructive/30 text-destructive-foreground/80 hover:bg-destructive/20 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background"
+                            >
+                                Dismiss
+                            </button>
+                        </div>
+                    </div>
+                </div>
+              )}
+              <Preview
+                editedImages={editedImages}
+                isLoading={isLoading || isGeneratingNewPrompt}
+                prompt={currentPrompt}
+                onSaveToDrive={handleSaveToDrive}
+                onSignIn={handleSignIn}
+                isSignedIn={isSignedIn}
+                isGapiReady={isGapiReady}
+                isSavingToDrive={isSavingToDrive}
+                isDriveConfigured={googleDriveService.isDriveConfigured}
+                onRetryWithSamePrompt={handleRetryWithSamePrompt}
+              />
+              <History prompts={promptHistory} onSelectPrompt={handleUseHistoryPrompt} isGeneratingNewPrompt={isGeneratingNewPrompt} />
             </div>
           </div>
         </main>
