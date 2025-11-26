@@ -89,20 +89,20 @@ const Header: React.FC<{ theme: Theme; setTheme: (theme: Theme) => void; onOpenS
           </div>
           <div className="flex items-center gap-2 self-end sm:self-auto">
             {isUserKeyActive && (
-                <div title="Using your custom API Key" className="h-10 w-10 flex items-center justify-center text-primary border border-primary/30 rounded-full bg-primary/10" aria-label="Custom API Key is active">
+                <div title="Using your custom API Key" className="h-11 w-11 flex items-center justify-center text-primary border border-primary/30 rounded-full bg-primary/10 shrink-0" aria-label="Custom API Key is active">
                     <KeyIcon />
                 </div>
             )}
             <button
                 onClick={onOpenSettings}
-                className="h-10 w-10 flex items-center justify-center rounded-full border border-border/70 bg-card/80 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/60 transition transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
+                className="h-11 w-11 flex items-center justify-center rounded-full border border-border/70 bg-card/80 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/60 transition transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background shrink-0"
                 aria-label="Open API Key Settings"
             >
                 <SettingsIcon />
             </button>
             <button
                 onClick={toggleTheme}
-                className="h-10 w-10 flex items-center justify-center rounded-full border border-border/70 bg-card/80 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/60 transition transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
+                className="h-11 w-11 flex items-center justify-center rounded-full border border-border/70 bg-card/80 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/60 transition transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background shrink-0"
                 aria-label="Toggle theme"
             >
                 <SunIcon />
