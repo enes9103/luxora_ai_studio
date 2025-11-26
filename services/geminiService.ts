@@ -89,7 +89,11 @@ const withRetry = async <T>(apiCall: () => Promise<T>): Promise<T> => {
 // --- Gemini Client Initialization ---
 
 const getAiClient = (apiKey?: string | null): GoogleGenAI => {
-    const finalApiKey = apiKey || process.env.API_KEY;
+    // Prefer user-provided key, then environment variables (support multiple names)
+    const finalApiKey = apiKey 
+        || process.env.GEMINI_API_KEY 
+        || process.env.VITE_GEMINI_API_KEY 
+        || process.env.API_KEY;
     if (!finalApiKey) {
         throw new Error("API key is not configured. Please provide your own key in the settings or ensure the API_KEY environment variable is set.");
     }
