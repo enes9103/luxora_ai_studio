@@ -15,7 +15,22 @@ import type {
   NegativePrompt,
 } from "../types";
 
-const USAGE_STORAGE_KEY = process.env.USAGE_STORAGE_KEY || "geminiApiUsage";
+const getEnvValue = (key: string): string | undefined => {
+  // Access Vite's import.meta.env safely in the browser, fall back to process.env for SSR/tests.
+  if (typeof import.meta !== "undefined" && (import.meta as any).env) {
+    const viteEnv = (import.meta as any).env;
+    return viteEnv[key] ?? viteEnv[`VITE_${key}`];
+  }
+  if (typeof process !== "undefined" && process.env) {
+    return process.env[key];
+  }
+  return undefined;
+};
+
+const USAGE_STORAGE_KEY =
+  getEnvValue("VITE_USAGE_STORAGE_KEY") ||
+  getEnvValue("USAGE_STORAGE_KEY") ||
+  "geminiApiUsage";
 
 // --- API Usage Tracking ---
 
@@ -114,9 +129,9 @@ const getAiClient = (apiKey?: string | null): GoogleGenAI => {
   // Prefer user-provided key, then environment variables (support multiple names)
   const finalApiKey =
     apiKey ||
-    process.env.GEMINI_API_KEY ||
-    process.env.VITE_GEMINI_API_KEY ||
-    process.env.API_KEY;
+    getEnvValue("VITE_GEMINI_API_KEY") ||
+    getEnvValue("GEMINI_API_KEY") ||
+    getEnvValue("API_KEY");
   if (!finalApiKey) {
     throw new Error(
       "API key is not configured. Please provide your own key in the settings or ensure the API_KEY environment variable is set."

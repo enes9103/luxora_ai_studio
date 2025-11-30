@@ -16,7 +16,7 @@ Luxora AI Studio transforms your photos into cinematic and experimental looks us
    ```
 2) Configure your key in `.env.local`  
    ```
-   GEMINI_API_KEY=your-key-here
+   VITE_GEMINI_API_KEY=your-key-here
    ```
 3) Run the app  
    ```bash

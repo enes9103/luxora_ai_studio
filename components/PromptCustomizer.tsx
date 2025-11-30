@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { Gender, ImageData, ArtisticStyle, TextModel, SubjectSpecificDetails, ImageModel, NegativePrompt } from '../types';
 import { ImageUploader } from './ImageUploader';
 import { GenderSelector } from './GenderSelector';
@@ -314,6 +314,8 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
   const [gender1, setGender1] = useState<Gender>('unspecified');
   const [gender2, setGender2] = useState<Gender>('unspecified');
   const [style, setStyle] = useState<ArtisticStyle>('Cinematic Photorealism');
+  const [isStyleOpen, setIsStyleOpen] = useState(false);
+  const styleDropdownRef = useRef<HTMLDivElement | null>(null);
   const [subject1Details, setSubject1Details] = useState<SubjectSpecificDetails>({ costume: '', subject_expression: '', subject_action: '' });
   const [subject2Details, setSubject2Details] = useState<SubjectSpecificDetails>({ costume: '', subject_expression: '', subject_action: '' });
   
@@ -328,7 +330,25 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
   const [isDetails2Open, setIsDetails2Open] = useState(false);
   const [isSceneDetailsOpen, setIsSceneDetailsOpen] = useState(false);
   const [isNegativePromptOpen, setIsNegativePromptOpen] = useState(false);
-  
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isStyleOpen && styleDropdownRef.current && !styleDropdownRef.current.contains(event.target as Node)) {
+        setIsStyleOpen(false);
+      }
+    };
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsStyleOpen(false);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isStyleOpen]);
+
   const imagesToGenerate = isJsonOnly ? 0 : numImages;
 
   const handleGenerate = () => {
@@ -408,17 +428,44 @@ export const PromptCustomizer: React.FC<PromptCustomizerProps> = ({
           <Card>
              <CardHeader title="3. Configure AI" description="Set parameters for your creation." />
              <CardContent className="space-y-4">
-                <div>
+                <div ref={styleDropdownRef} className="relative">
                     <label htmlFor="style-select" className="block text-sm font-medium text-card-foreground mb-2">Artistic Style (for Randomize)</label>
-                    <select
+                    <button
                         id="style-select"
-                        value={style}
-                        onChange={(e) => setStyle(e.target.value as ArtisticStyle)}
-                        className="w-full h-10 bg-background text-foreground border border-input rounded-md shadow-sm focus:ring-ring focus:border-ring sm:text-sm px-3 py-2"
+                        type="button"
+                        onClick={() => !isDisabled && setIsStyleOpen((prev) => !prev)}
                         disabled={isDisabled}
+                        className={`w-full h-10 bg-background text-foreground border border-input rounded-md shadow-sm px-3 py-2 flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${isDisabled ? 'opacity-50' : ''}`}
+                        aria-haspopup="listbox"
+                        aria-expanded={isStyleOpen}
                     >
-                        {styleOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
-                    </select>
+                        <span className="truncate">{styleOptions.find((option) => option.value === style)?.label || style}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform ${isStyleOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    {isStyleOpen && !isDisabled && (
+                        <div
+                            role="listbox"
+                            className="absolute z-30 mt-1 w-full max-h-64 overflow-y-auto rounded-md border border-border bg-card shadow-2xl"
+                        >
+                            {styleOptions.map((option) => (
+                                <button
+                                    key={option.value}
+                                    type="button"
+                                    role="option"
+                                    aria-selected={option.value === style}
+                                    onClick={() => {
+                                        setStyle(option.value as ArtisticStyle);
+                                        setIsStyleOpen(false);
+                                    }}
+                                    className={`w-full text-left px-3 py-2 text-sm hover:bg-muted focus:bg-muted transition ${
+                                        option.value === style ? 'bg-muted/80 font-semibold' : ''
+                                    }`}
+                                >
+                                    {option.label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
                 <div>
                     <label htmlFor="text-model-select" className="block text-sm font-medium text-card-foreground mb-2">Prompt Generation Model</label>
