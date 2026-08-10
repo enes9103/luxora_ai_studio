@@ -7,7 +7,7 @@ const createPromptFromDetails = (details: PromptDetails): string => {
   const parts: string[] = [];
 
   const baseInstruction = details.subject2
-    ? 'You will perform an image edit using the people from the provided photos as the main subjects (Subject 1 and Subject 2). Facial features can be adapted to the artistic style, but the core likeness and recognizable characteristics must be preserved.'
+    ? 'You will perform an image edit using the people from the provided photos as the main subjects. Facial features can be adapted to the artistic style, but the core likeness and recognizable characteristics must be preserved.'
     : 'You will perform an image edit using the person from the provided photo as the main subject. Facial features can be adapted to the artistic style, but the core likeness and recognizable characteristics must be preserved.';
   parts.push(baseInstruction);
 
