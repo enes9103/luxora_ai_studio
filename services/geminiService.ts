@@ -32,8 +32,6 @@ const USAGE_STORAGE_KEY =
   getEnvValue("USAGE_STORAGE_KEY") ||
   "geminiApiUsage";
 
-// --- API Usage Tracking ---
-
 type ApiUsage = { defaultKey: number; userKey: number };
 
 export const getApiUsage = (): ApiUsage => {
