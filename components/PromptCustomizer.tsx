@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import type { Gender, ImageData, ArtisticStyle, TextModel, SubjectSpecificDetails, ImageModel, NegativePrompt } from '../types';
 import { ImageUploader } from './ImageUploader';
@@ -99,7 +98,6 @@ const NegativePromptInput: React.FC<{
         />
     </div>
 );
-
 
 const Card: React.FC<{children: React.ReactNode, className?: string}> = ({children, className}) => (
     <div className={`relative overflow-hidden bg-card/90 border border-border/70 rounded-2xl shadow-[0_20px_60px_-35px_rgba(0,0,0,0.65)] backdrop-blur ${className}`}>
