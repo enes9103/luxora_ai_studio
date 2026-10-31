@@ -26,7 +26,6 @@ const Slider: React.FC<{ label: string; value: number; min: number; max: number;
     </div>
 );
 
-
 export const ImageCropperModal: React.FC<ImageCropperModalProps> = ({ imageSrc, onCropComplete, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
