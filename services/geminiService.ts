@@ -119,8 +119,6 @@ const withRetry = async <T>(apiCall: () => Promise<T>): Promise<T> => {
   throw lastError;
 };
 
-// --- Gemini Client Initialization ---
-
 const getAiClient = (apiKey?: string | null): GoogleGenAI => {
   // Prefer user-provided key, then environment variables (support multiple names)
   const finalApiKey =
@@ -155,8 +153,6 @@ const subjectDetailsSchema = {
   required: ["costume", "subject_expression", "subject_action"],
 };
 
-// Fix: Added a responseSchema to enforce a JSON object structure for the response,
-// improving reliability based on Gemini API best practices.
 const promptSchema = {
   type: Type.OBJECT,
   properties: {
@@ -211,7 +207,7 @@ const promptSchema = {
           description: "Key dynamic or static elements in the environment.",
         },
         subject1: subjectDetailsSchema,
-        subject2: subjectDetailsSchema, // Optional in the type, but we can require it in the prompt
+        subject2: subjectDetailsSchema,
         negative_prompt: {
           type: Type.OBJECT,
           properties: {
