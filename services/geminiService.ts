@@ -15,7 +15,6 @@ import type {
 } from "../types";
 
 const getEnvValue = (key: string): string | undefined => {
-  // Access Vite's import.meta.env safely in the browser, fall back to process.env for SSR/tests.
   if (typeof import.meta !== "undefined" && (import.meta as any).env) {
     const viteEnv = (import.meta as any).env;
     return viteEnv[key] ?? viteEnv[`VITE_${key}`];
