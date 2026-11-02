@@ -1,4 +1,3 @@
-// FIX: Import GenerateContentResponse to properly type the return value from the Gemini API.
 import {
   GoogleGenAI,
   Modality,
