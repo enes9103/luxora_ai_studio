@@ -61,7 +61,6 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, upl
         onImageUpload(null);
       } finally {
         setProgress(null);
-        // FIX: Clear the file input value to allow re-uploading the same file
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
