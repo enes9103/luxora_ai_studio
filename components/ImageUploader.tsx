@@ -69,7 +69,6 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, upl
   };
 
   const handleButtonClick = () => {
-    // Don't open file dialog if we are currently reading a file
     if (progress === null) {
       fileInputRef.current?.click();
     }
