@@ -134,7 +134,6 @@ export const CustomPromptModal: React.FC<CustomPromptModalProps> = ({ isOpen, on
 
   useEffect(() => {
     if (isOpen) {
-        // Ensure subject1 and subject2 are initialized properly
         const newDetails = { ...initialDetails };
         if (!newDetails.subject1) newDetails.subject1 = { ...initialSubjectDetails };
         if (!newDetails.subject2) newDetails.subject2 = { ...initialSubjectDetails };
@@ -183,7 +182,6 @@ export const CustomPromptModal: React.FC<CustomPromptModalProps> = ({ isOpen, on
 
   const handleSubmit = () => {
     const finalDetails = { ...details };
-    // If subject 2 details are all empty, remove it from the final object
     if (details.subject2 && !details.subject2.costume && !details.subject2.subject_action && !details.subject2.subject_expression) {
         delete finalDetails.subject2;
     }
