@@ -80,7 +80,6 @@ const INITIAL_BACKOFF_MS = 1000;
 const isTransientError = (e: unknown): boolean => {
   if (e instanceof Error) {
     const errorMessage = e.message.toLowerCase();
-    // Check for common transient error indicators
     return (
       errorMessage.includes("503") ||
       errorMessage.includes("unavailable") ||
