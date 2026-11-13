@@ -73,7 +73,6 @@ export const resetApiUsage = (): ApiUsage => {
   return defaultUsage;
 };
 
-// --- Retry Logic for Transient Errors ---
 const MAX_RETRIES = 3;
 const INITIAL_BACKOFF_MS = 1000;
 
