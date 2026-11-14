@@ -42,7 +42,6 @@ export const loadGisScript = () => new Promise<void>((resolve) => {
     document.body.appendChild(script);
 });
 
-
 export const gapiInit = (): Promise<void> => {
     return new Promise((resolve, reject) => {
         window.gapi.load('client', async () => {
@@ -109,7 +108,6 @@ export const uploadImageAndPrompt = async (imageDataUrl: string, prompt: Prompt,
     formPrompt.append('metadata', new Blob([JSON.stringify(promptMetadata)], { type: 'application/json' }));
     formPrompt.append('file', promptBlob);
 
-    // First upload the image
     const imageResponse = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
         method: 'POST',
         headers: new Headers({ 'Authorization': `Bearer ${window.gapi.client.getToken().access_token}` }),
@@ -120,8 +118,7 @@ export const uploadImageAndPrompt = async (imageDataUrl: string, prompt: Prompt,
         const error = await imageResponse.json();
         throw new Error(`Failed to upload image: ${error.error.message}`);
     }
-    
-    // Then upload the prompt
+
     const promptResponse = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
         method: 'POST',
         headers: new Headers({ 'Authorization': `Bearer ${window.gapi.client.getToken().access_token}` }),
