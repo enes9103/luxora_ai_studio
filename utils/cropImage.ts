@@ -13,9 +13,6 @@ export function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
 }
 
-/**
- * Returns the new bounding area of a rotated rectangle.
- */
 export function rotateSize(width: number, height: number, rotation: number) {
   const rotRad = getRadianAngle(rotation);
 
@@ -57,7 +54,6 @@ export default async function getCroppedImg(
     rotation
   );
 
-  // Set the canvas size to the bounding box size.
   canvas.width = bBoxWidth;
   canvas.height = bBoxHeight;
 
