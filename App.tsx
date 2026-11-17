@@ -332,7 +332,6 @@ const App: React.FC = () => {
   };
 
   const performImageEdit = useCallback(async (prompt: Prompt, quality: string, aspectRatio: string, numImages: number, removeBackground: boolean, selectedImageModel: ImageModel) => {
-    // Enforce API key for Gemini 3 Pro Image
     if (selectedImageModel === 'gemini-3-pro-image-preview' && !userApiKey) {
         setError(
             <>
